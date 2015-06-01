@@ -9,7 +9,9 @@
   "perl" : "v6",
   "build-depends" : [ ],
   "provides" : {
-    "XDG::BaseDirectory" : "lib/XDG/BaseDirectory.pm"
+    "XDG::BaseDirectory" : "lib/XDG/BaseDirectory.pm",
+    "XDG::IniFile" : "lib/XDG/IniFile.pm",
+    "XDG::X"  : "lib/XDG/X.pm"
   },
   "depends" : [ "XML", "Config::INI" ],
   "test-depends" : [
