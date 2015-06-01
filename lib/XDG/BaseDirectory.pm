@@ -2,30 +2,35 @@ use v6;
 
 =begin pod
 
-This module is based on a rox module (LGPL):
+=head1 NAME
 
-http://cvs.sourceforge.net/viewcvs.py/rox/ROX-Lib2/python/rox/basedir.py?rev=1.9&view=log
+XDG::BaseDirectory - locate shared data and configuration
+
+=head1 SYNOPSIS
+
+=begin code
+
+    my $bd = XDG::BaseDirectory.new
+
+    for $bd.load-config-paths('mydomain.org', 'MyProg', 'Options') -> $d {
+        say $d;
+    }
+
+=end code
+
+=head1 DESCRIPTION
 
 The freedesktop.org Base Directory specification provides a way for
 applications to locate shared data and configuration:
 
     http://standards.freedesktop.org/basedir-spec/
 
-(based on version 0.6)
-
 This module can be used to load and save from and to these directories.
 
-Typical usage:
+The interface is loosely based on that of the C<pyxdg> module, however all
+methods that return a string path in that module return an L<IO::Path> here.
 
-    from rox import basedir
-    
-    for dir in basedir.load_config_paths('mydomain.org', 'MyProg', 'Options'):
-        print "Load settings from", dir
-
-    dir = basedir.save_config_path('mydomain.org', 'MyProg')
-    print >>file(os.path.join(dir, 'Options'), 'w'), "foo=2"
-
-Note: see the rox.Options module for a higher-level API for managing options.
+=head2 METHODS
 
 =end pod
 
