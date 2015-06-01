@@ -4,6 +4,7 @@ use v6;
 use lib 'lib';
 
 use Test;
+use Shell::Command;
 
 use XDG::BaseDirectory;
 
@@ -38,17 +39,26 @@ is($obj.xdg-data-home.Str, $base.child($*SPEC.catfile('.local', 'share')).Str, '
 
 ok(my $scp = $obj.save-config-path('foo', 'bar'), 'save-config-path');
 isa-ok($scp, IO::Path, 'and it is an IO::Path');
-ok($scp.Str.IO.d, 'and the directory exists');
+ok($scp.Str.IO.d, 'and the directory exists (directly from path)');
 ok($scp.d, 'and the directory exists');
 
+ok((my @cp = $obj.load-config-paths('foo','bar')), 'load-config-paths');
+ok(@cp.elems, "got at least one element");
+is(@cp[0].Str, $scp.Str, "and it is the one that we expected");
 
+ok(my $sdp = $obj.save-data-path('foo', 'bar'), 'save-data-path');
+isa-ok($sdp, IO::Path, 'and it is an IO::Path');
+ok($sdp.Str.IO.d, 'and the directory exists (directly from path)');
+ok($sdp.d, 'and the directory exists');
 
-
+ok((my @dp = $obj.load-data-paths('foo','bar')), 'load-data-paths');
+ok(@dp.elems, "got at least one element");
+is(@dp[0].Str, $sdp.Str, "and it is the one that we expected");
 
 
 END {
    if $base.e {
-      $base.rmdir;
+      rm_rf($base);
    }
 }
 
