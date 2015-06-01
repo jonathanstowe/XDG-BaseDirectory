@@ -11,7 +11,7 @@
   "provides" : {
     "XDG::BaseDirectory" : "lib/XDG/BaseDirectory.pm"
   },
-  "depends" : [ ],
+  "depends" : [ "XML", "Config::INI" ],
   "test-depends" : [
     "File::Find",
     "Shell::Command"
