@@ -74,18 +74,17 @@ class XDG::IniFile {
     }
 
     # start stuff to access the keys
-    method get(Str $key, Str $group = Str, Bool $locale = False, Str $type = "string", Bool $list = False) {
-        # set default group
-        $group //= $!default-group; 
+    multi method get(Str $key, Bool :$locale = False, Str :$type = "string", Bool :$list = False) {
+        self.get($key, $!default-group, :$locale, :$type, :$list);
+    }
 
-        # return key (with locale)
-        #
+    multi method get(Str $key, Str $group, Bool :$locale = False, Str :$type = "string", Bool :$list = False) {
 
         my $value;
 
         if  %!content{$group}{$key}:exists {
             if $locale {
-                $value = %!content{$group}{self!add-locale($key,$group)};
+                $value = %!content{$group}{self.add-locale($key,$group)};
             }
             else {
                 $value = %!content{$group}{$key};
@@ -215,11 +214,11 @@ class XDG::IniFile {
 
     # Need the locale stuff working for this
     # "add locale to key according the current lc_messages"
-    method !add-locale(Str $key, Str $group?) {
-        # set default group
-        if !$group {
-            $group = $!default-group;
-        }
+    multi method add-locale(Str $key) returns Str {
+        self.add-locale($key, $!default-group);
+    }
+
+    multi method add-locale(Str $key, Str $group) returns Str {
 
 =begin comment
 
@@ -289,7 +288,7 @@ class XDG::IniFile {
     method check-key(Str $key, Str $value, Str $group) { * }
 
     # check random stuff
-    method check-value(Str $key, Str $value, Str $type = "string", Bool $list = False) {
+    method check-value(Str $key, Str $value, Str :$type = "string", Bool :$list = False) {
 
         my @values;
 
@@ -412,17 +411,15 @@ class XDG::IniFile {
     }
 
     # write support
-    method write(Str $filename = Str, Bool $trusted = False) {
 
-        my $fname = $filename // $!filename;
+    multi method write(Bool :$trusted = False) {
+        self.write($!filename, :$trusted);
+    }
+    multi method write(Str $filename, Bool :$trusted = False) {
 
-        if not $fname {
-            XDG::X::ParsingError.new(message => "File not found", file => '');
-        }
+        $!filename = $filename;
 
-        $!filename = $fname;
-
-        my IO::Path $file_io = $fname.IO;
+        my IO::Path $file_io = $filename.IO;
 
 
         if not $file_io.parent.d {
@@ -457,16 +454,18 @@ class XDG::IniFile {
         $!tainted = False
     }
 
-    method set(Str $key, Str $value, Str $group = Str, Bool $locale = False) {
-        # set default group
-        $group //= $!default-group;
+    multi method set(Str $key, Str $value, Bool :$locale = False ) {
+        self.set($key, $value, $!default-group, :$locale);
+    }
+
+    multi method set(Str $key, Str $value, Str $group, Bool :$locale = False) {
 
         if not %!content{$group}:exists {
             XDG::X::NoGroupError.new( group => $group, filename => $!filename);
         }
 
         if $locale {
-            $key = self!add-locale($key, $group);
+            $key = self.add-locale($key, $group);
         }
 
         %!content{$group}{$key} = $value;
@@ -500,13 +499,15 @@ class XDG::IniFile {
         $existed;
     }
 
-    method remove-key(Str $key, Str $group = Str, Bool $locale = True) {
-        $group //= $!default-group;
+    multi method remove-key(Str $key, Bool :$locale = False ) {
+        self.remove-key($key, $!default-group, :$locale);
+    }
+    multi method remove-key(Str $key, Str $group, Bool :$locale = False) {
 
         my Str $value;
 
         if $locale {
-            $key = self!add-locale($key, $group);
+            $key = self.add-locale($key, $group);
         }
 
         if not self.has-group($group) {
@@ -535,8 +536,10 @@ class XDG::IniFile {
         %!content{$group}:exists;
     }
 
-    method has-key(Str $key, Str $group = Str ) {
-        $group //= $!default-group;
+    multi method has-key(Str $key) returns Bool {
+        self.has-key($key, $!default-group);
+    }
+    multi method has-key(Str $key, Str $group )returns Bool  {
 
         my $rc = False;
 
