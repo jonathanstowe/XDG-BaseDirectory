@@ -1,4 +1,7 @@
-"""
+use v6;
+
+=begin pod
+
 Complete implementation of the XDG Desktop Entry Specification Version 0.9.4
 http://standards.freedesktop.org/desktop-entry-spec/
 
@@ -8,14 +11,15 @@ Not supported:
 - Does not check URL's
 - Does not completly validate deprecated/kde items
 - Does not completly check categories
-"""
 
-from xdg.IniFile import *
-from xdg.BaseDirectory import *
-import os.path
+=end pod
 
-class DesktopEntry(IniFile):
-    "Class to parse and validate DesktopEntries"
+use XDG::IniFile;
+use XDG::BaseDirectory;
+
+# "Class to parse and validate DesktopEntries"
+
+class XDG::DesktopEntry is XDG::IniFile {
 
     defaultGroup = 'Desktop Entry'
 
@@ -394,4 +398,5 @@ class DesktopEntry(IniFile):
         for item in values:
             if item not in additional + main and item[0:2] != "X-":
                 self.errors.append("'%s' is not a registered Category" % item);
-
+}
+# vim: ft=perl6

@@ -74,7 +74,7 @@ class XDG::IniFile {
     }
 
     # start stuff to access the keys
-    method get(Str $key, Str $group = Nil, Bool $locale = False, Str $type = "string", Bool $list = False) {
+    method get(Str $key, Str $group = Str, Bool $locale = False, Str $type = "string", Bool $list = False) {
         # set default group
         $group //= $!default-group; 
 
@@ -412,7 +412,7 @@ class XDG::IniFile {
     }
 
     # write support
-    method write(Str $filename = Nil, Bool $trusted = False) {
+    method write(Str $filename = Str, Bool $trusted = False) {
 
         my $fname = $filename // $!filename;
 
@@ -457,7 +457,7 @@ class XDG::IniFile {
         $!tainted = False
     }
 
-    method set(Str $key, Str $value, Str $group = Nil, Bool $locale = False) {
+    method set(Str $key, Str $value, Str $group = Str, Bool $locale = False) {
         # set default group
         $group //= $!default-group;
 
@@ -500,7 +500,7 @@ class XDG::IniFile {
         $existed;
     }
 
-    method remove-key(Str $key, Str $group = Nil, Bool $locale = True) {
+    method remove-key(Str $key, Str $group = Str, Bool $locale = True) {
         $group //= $!default-group;
 
         my Str $value;
@@ -535,7 +535,7 @@ class XDG::IniFile {
         %!content{$group}:exists;
     }
 
-    method has-key(Str $key, Str $group = Nil ) {
+    method has-key(Str $key, Str $group = Str ) {
         $group //= $!default-group;
 
         my $rc = False;
