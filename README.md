@@ -1,20 +1,18 @@
-# XDG
+# XDG::BaseDirectory
 
-Perl 6 access to data provided by the xdg spec http://www.freedesktop.org/wiki/Specifications/ loosely based on pyxdg
+Perl 6 access to path information provided by the xdg base directory
+specfication http://www.freedesktop.org/wiki/Specifications/basedir-spec/.
 
 ## Description
 
 This is loosely based on the interface of python module pyxdg. But due to the
 differences between Python and Perl 6 it may do some things differently.
 
-It provides a set of facilities for managing the configuration and data
-of applications and managing some user settings provided by various
-desktop environments.
+It provides a set of facilities for discovering the location configuration
+and data of applications.
 
-It is probably only any use to you if you are using a system that
-uses one of the desktop environments that support the freedesktop.org
-specifications, such as Gnome or KDE or applications that are designed
-to work in those environments.
+I split this out from the XDG module as it has more general usefulness and
+no external dependencies.
 
 ## Installation
 
@@ -36,7 +34,7 @@ Alternatively you could install with *panda* from the checkout:
 
 or remote:
 
-     panda install XDG 
+     panda install XDG::BaseDirectory 
 
 Other install mechanisms may be become available in the future.
 
@@ -46,7 +44,7 @@ This should be considered experimental software until such time that
 Perl 6 reaches an official release.  However suggestions/patches are
 welcomed via github at
 
-   https://github.com/jonathanstowe/XDG
+   https://github.com/jonathanstowe/XDG-BaseDirectory
 
 I'm not able to test on a wide variety of platforms so any help there
 would be appreciated.
