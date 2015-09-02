@@ -1,5 +1,5 @@
 {
-  "name" : "XDG",
+  "name" : "XDG::BaseDirectory",
   "support" : {
     "source" : "git://github.com/jonathanstowe/XDG-BaseDirectory.git"
   },
