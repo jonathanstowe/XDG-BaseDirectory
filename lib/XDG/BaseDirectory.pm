@@ -36,12 +36,31 @@ methods that return a string path in that module return an L<IO::Path> here.
 
 class XDG::BaseDirectory:ver<v0.0.1>:auth<github:jonathanstowe> {
 
+=begin pod
+
+=head2 data-home
+
+This reflects the base path where local data should be stored.  Can be
+over-ridden by the environment variable C<XDG_DATA_HOME>.
+
+=end pod
+
     has IO::Path $.data-home; 
     
     method data-home() returns IO::Path {
         $!data-home //= %*ENV<XDG_DATA_HOME>.defined ?? %*ENV<XDG_DATA_HOME>.IO !! $*HOME.child($*SPEC.catfile('.local', 'share'));
 
     }
+
+=begin pod 
+
+=head2 data-dirs
+
+This returns a list of the locations where data can be read from, it can
+be over-ridden by the colon separated environment variable C<XDG_DATA_DIRS>
+but will always prefer C<data-home>.
+
+=end pod
 
     has IO::Path @.data-dirs;
 
@@ -52,11 +71,32 @@ class XDG::BaseDirectory:ver<v0.0.1>:auth<github:jonathanstowe> {
         @!data-dirs;
     }
 
+=begin pod
+
+=head2 config-home
+
+Reflects the location where application should be saved to to.  Can
+be over-ridden by the enviroment variable C<XDG_CONFIG_HOME>.
+
+
+=end pod
+
     has IO::Path $.config-home;
 
     method config-home() returns IO::Path {
         $!config-home //= %*ENV<XDG_CONFIG_HOME>.defined ?? %*ENV<XDG_CONFIG_HOME>.IO !! $*HOME.child('.config');
     }
+
+=begin pod
+
+=head2 config-dirs
+
+returns a list of directorys from which configuration can be read, it will
+always prefer C<config-home> but the defaults can be over-ridden by the
+environment variable C<XDG_CONFIG_DIRS> which can be a list separated by
+colons.
+
+=end pod
 
     has IO::Path @.config-dirs;
 
@@ -66,6 +106,15 @@ class XDG::BaseDirectory:ver<v0.0.1>:auth<github:jonathanstowe> {
         }
         @!config-dirs;
     }
+
+=begin pod
+
+=head2 cache-home
+
+Returns the path where application cache data should be saved. This can be
+over-ridden by the environment variable C<XDG_CACHE_HOME>.
+
+=end pod
 
     has IO::Path $.cache-home;
 
@@ -77,7 +126,7 @@ class XDG::BaseDirectory:ver<v0.0.1>:auth<github:jonathanstowe> {
 
 =head2 save-config-path(Str *@resource)
 
-Ensure C<$XDG_CONFIG_HOME/<resource>/> exists, and return its path.
+Ensure C< <config-home>/<resource>/> exists, and return its path.
 'resource' should normally be the name of your application. Use this
 when SAVING configuration settings. Use the C<config-dirs> variable
 for loading.
@@ -92,7 +141,7 @@ for loading.
 
 =head3 save-data-path(Str *@resource)
 
-Ensure C<$XDG_DATA_HOME/<resource>/> exists, and return its path.
+Ensure C< <data-home>/<resource>/> exists, and return its path.
 'resource' is the name of some shared resource. Use this when updating
 a shared (between programs) database. Use the C<data-dirs> variable
 for loading.
