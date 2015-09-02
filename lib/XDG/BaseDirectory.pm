@@ -36,41 +36,41 @@ methods that return a string path in that module return an L<IO::Path> here.
 
 class XDG::BaseDirectory {
 
-    has IO::Path $.xdg-data-home; 
+    has IO::Path $.data-home; 
     
-    method xdg-data-home() returns IO::Path {
-        $!xdg-data-home //= %*ENV<XDG_DATA_HOME>.defined ?? %*ENV<XDG_DATA_HOME>.IO !! $*HOME.child($*SPEC.catfile('.local', 'share'));
+    method data-home() returns IO::Path {
+        $!data-home //= %*ENV<XDG_DATA_HOME>.defined ?? %*ENV<XDG_DATA_HOME>.IO !! $*HOME.child($*SPEC.catfile('.local', 'share'));
 
     }
 
-    has IO::Path @.xdg-data-dirs;
+    has IO::Path @.data-dirs;
 
-    method xdg-data-dirs() {
-        if ! @!xdg-data-dirs.elems {
-            @!xdg-data-dirs = $.xdg-data-home, (%*ENV<XDG_DATA_DIRS> || '/usr/local/share:/usr/share').split(':').map({ $_.IO });
+    method data-dirs() {
+        if ! @!data-dirs.elems {
+            @!data-dirs = $.data-home, (%*ENV<XDG_DATA_DIRS> || '/usr/local/share:/usr/share').split(':').map({ $_.IO });
         }
-        @!xdg-data-dirs;
+        @!data-dirs;
     }
 
-    has IO::Path $.xdg-config-home;
+    has IO::Path $.config-home;
 
-    method xdg-config-home() returns IO::Path {
-        $!xdg-config-home //= %*ENV<XDG_CONFIG_HOME>.defined ?? %*ENV<XDG_CONFIG_HOME>.IO !! $*HOME.child('.config');
+    method config-home() returns IO::Path {
+        $!config-home //= %*ENV<XDG_CONFIG_HOME>.defined ?? %*ENV<XDG_CONFIG_HOME>.IO !! $*HOME.child('.config');
     }
 
-    has IO::Path @.xdg-config-dirs;
+    has IO::Path @.config-dirs;
 
-    method xdg-config-dirs() {
-        if ! @!xdg-config-dirs.elems {
-            @!xdg-config-dirs = $.xdg-config-home, (%*ENV<XDG_CONFIG_DIRS> || '/etc/xdg' ).split(':').map({ $_.IO });
+    method config-dirs() {
+        if ! @!config-dirs.elems {
+            @!config-dirs = $.config-home, (%*ENV<XDG_CONFIG_DIRS> || '/etc/xdg' ).split(':').map({ $_.IO });
         }
-        @!xdg-config-dirs;
+        @!config-dirs;
     }
 
-    has IO::Path $.xdg-cache-home;
+    has IO::Path $.cache-home;
 
-    method xdg-cache-home() returns IO::Path {
-        $!xdg-cache-home //= %*ENV<XDG_CACHE_HOME> || $*HOME.child('.cache');
+    method cache-home() returns IO::Path {
+        $!cache-home //= %*ENV<XDG_CACHE_HOME> || $*HOME.child('.cache');
     }
 
 =begin pod
@@ -79,13 +79,13 @@ class XDG::BaseDirectory {
 
 Ensure C<$XDG_CONFIG_HOME/<resource>/> exists, and return its path.
 'resource' should normally be the name of your application. Use this
-when SAVING configuration settings. Use the C<xdg-config-dirs> variable
+when SAVING configuration settings. Use the C<config-dirs> variable
 for loading.
 
 =end pod
 
     method save-config-path(*@resource where @resource.elems > 0 ) returns IO::Path {
-        self!home-path($.xdg-config-home, @resource);
+        self!home-path($.config-home, @resource);
     }
 
 =begin pod
@@ -94,14 +94,14 @@ for loading.
 
 Ensure C<$XDG_DATA_HOME/<resource>/> exists, and return its path.
 'resource' is the name of some shared resource. Use this when updating
-a shared (between programs) database. Use the C<xdg-data-dirs> variable
+a shared (between programs) database. Use the C<data-dirs> variable
 for loading.
 
 
 =end pod
 
     method save-data-path(*@resource where @resource.elems > 0) {
-        self!home-path($.xdg-data-home, @resource);
+        self!home-path($.data-home, @resource);
     }
 
     # given an IO::Path and a resource description, will return an IO::Path of the
@@ -128,7 +128,7 @@ take precedence over later ones (ie, the user's config dir comes first).
 =end pod
 
     method load-config-paths(*@resource ) {
-        self!load-resource-paths(@.xdg-config-dirs, @resource);
+        self!load-resource-paths(@.config-dirs, @resource);
     }
 
 =begin pod
@@ -155,7 +155,7 @@ take precedence over later ones.
 =end pod 
 
     method load-data-paths(*@resource where @resource.elems > 0 ) {
-        self!load-resource-paths(@.xdg-data-dirs, @resource);
+        self!load-resource-paths(@.data-dirs, @resource);
     }
 
     # given an array of IO::Path objects and a resource description
