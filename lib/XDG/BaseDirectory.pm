@@ -1,4 +1,4 @@
-use v6.c;
+use v6;
 
 =begin pod
 
@@ -34,7 +34,7 @@ methods that return a string path in that module return an L<IO::Path> here.
 
 =end pod
 
-class XDG::BaseDirectory:ver<0.0.7>:auth<github:jonathanstowe> {
+class XDG::BaseDirectory:ver<0.0.8>:auth<github:jonathanstowe>:api<1.0> {
 
 =begin pod
 
@@ -126,10 +126,13 @@ over-ridden by the environment variable C<XDG_CACHE_HOME>.
 
 =head2 runtime-dir
 
-Returns the directory where user specific, run-time files (and other filesystem objects such as sockets and named pipes,)
-should be placed.  The directory will not persist between logins and reboots of the system. For this to work correctly
-the system should be managing the directory and set the environment variable C<XDG_RUNTIME_DIR>, however if this is not
-the case the behaviour will be emulated in a less secure fashion and a warning will be emitted.
+Returns the directory where user specific, run-time files (and other
+filesystem objects such as sockets and named pipes,) should be placed.
+The directory will not persist between logins and reboots of the
+system. For this to work correctly the system should be managing the
+directory and set the environment variable C<XDG_RUNTIME_DIR>, however
+if this is not the case the behaviour will be emulated in a less secure
+fashion and a warning will be emitted.
 
 =end pod
 
@@ -212,7 +215,8 @@ take precedence over later ones (ie, the user's config dir comes first).
 
 =head3 load-first-config(Str *@resource) returns L<IO::Path>
 
-Returns the first result from load-config-paths, or None if there is nothing to load.
+Returns the first result from load-config-paths, or None if there is
+nothing to load.
 
 =end pod
 

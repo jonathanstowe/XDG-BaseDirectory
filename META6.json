@@ -4,17 +4,14 @@
   "support": {
     "source": "git://github.com/jonathanstowe/XDG-BaseDirectory.git"
   },
-  "perl": "6.c",
+  "perl": "6.*",
   "resources": [
-    
   ],
   "build-depends": [
-    
   ],
   "author": "Jonathan Stowe <jns+git@gellyfish.co.uk",
   "auth": "github:jonathanstowe",
   "depends": [
-    
   ],
   "tags": [
     "xdg",
@@ -29,7 +26,8 @@
   "provides": {
     "XDG::BaseDirectory": "lib/XDG/BaseDirectory.pm"
   },
-  "version": "0.0.7",
+  "version": "0.0.8",
+  "api": "1.0",
   "authors": [
     "Jonathan Stowe <jns+git@gellyfish.co.uk"
   ],
