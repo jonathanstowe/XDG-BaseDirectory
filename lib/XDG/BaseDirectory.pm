@@ -47,7 +47,7 @@ over-ridden by the environment variable C<XDG_DATA_HOME>.
 
     has IO::Path $.data-home;
 
-    method data-home() returns IO::Path {
+    method data-home( --> IO::Path ) {
         $!data-home //= %*ENV<XDG_DATA_HOME>.defined ?? %*ENV<XDG_DATA_HOME>.IO !! $*HOME.add($*SPEC.catfile('.local', 'share'));
 
     }
@@ -83,7 +83,7 @@ be over-ridden by the enviroment variable C<XDG_CONFIG_HOME>.
 
     has IO::Path $.config-home;
 
-    method config-home() returns IO::Path {
+    method config-home( --> IO::Path ) {
         $!config-home //= %*ENV<XDG_CONFIG_HOME>.defined ?? %*ENV<XDG_CONFIG_HOME>.IO !! $*HOME.add('.config');
     }
 
@@ -118,7 +118,7 @@ over-ridden by the environment variable C<XDG_CACHE_HOME>.
 
     has IO::Path $.cache-home;
 
-    method cache-home() returns IO::Path {
+    method cache-home( --> IO::Path ) {
         $!cache-home //= (%*ENV<XDG_CACHE_HOME> || $*HOME.add('.cache')).IO;
     }
 
@@ -138,7 +138,7 @@ fashion and a warning will be emitted.
 
     has IO::Path $.runtime-dir;
 
-    method runtime-dir() returns IO::Path {
+    method runtime-dir( --> IO::Path ) {
         $!runtime-dir //= do {
             if %*ENV<XDG_RUNTIME_DIR>:exists {
                 %*ENV<XDG_RUNTIME_DIR>.IO
@@ -164,7 +164,7 @@ for loading.
 
 =end pod
 
-    method save-config-path(*@resource where @resource.elems > 0 ) returns IO::Path {
+    method save-config-path(*@resource where @resource.elems > 0  --> IO::Path ) {
         self!home-path($.config-home, @resource);
     }
 
@@ -180,7 +180,7 @@ for loading.
 
 =end pod
 
-    method save-data-path(*@resource where @resource.elems > 0) {
+    method save-data-path(*@resource where @resource.elems > 0 --> IO::Path ) {
         self!home-path($.data-home, @resource);
     }
 
