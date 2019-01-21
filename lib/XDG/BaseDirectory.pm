@@ -34,7 +34,7 @@ methods that return a string path in that module return an L<IO::Path> here.
 
 =end pod
 
-class XDG::BaseDirectory:ver<0.0.8>:auth<github:jonathanstowe>:api<1.0> {
+class XDG::BaseDirectory:ver<0.0.9>:auth<github:jonathanstowe>:api<1.0> {
 
 =begin pod
 
