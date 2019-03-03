@@ -306,10 +306,10 @@ Example:
 
 =end pod
 
-my  XDG::BaseDirectory $XDG;
+my  $XDG;
 
 my sub xdg-basedirectory( --> XDG::BaseDirectory ) {
-    $XDG //= XDG::BaseDirectory.new;
+    $XDG //= ( $*XDG // XDG::BaseDirectory.new );
 }
 
 sub term:<data-home>   is export(:terms) { xdg-basedirectory.data-home   }
