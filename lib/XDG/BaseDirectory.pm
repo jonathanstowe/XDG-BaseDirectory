@@ -306,13 +306,17 @@ Example:
 
 =end pod
 
-my constant $XDG = XDG::BaseDirectory.new;
+my  XDG::BaseDirectory $XDG;
 
-sub term:<data-home>   is export(:terms) { $XDG.data-home   }
-sub term:<data-dirs>   is export(:terms) { $XDG.data-dirs   }
-sub term:<config-home> is export(:terms) { $XDG.config-home }
-sub term:<config-dirs> is export(:terms) { $XDG.config-dirs }
-sub term:<cache-home>  is export(:terms) { $XDG.cache-home  }
-sub term:<runtime-dir> is export(:terms) { $XDG.runtime-dir }
+my sub xdg-basedirectory( --> XDG::BaseDirectory ) {
+    $XDG //= XDG::BaseDirectory.new;
+}
+
+sub term:<data-home>   is export(:terms) { xdg-basedirectory.data-home   }
+sub term:<data-dirs>   is export(:terms) { xdg-basedirectory.data-dirs   }
+sub term:<config-home> is export(:terms) { xdg-basedirectory.config-home }
+sub term:<config-dirs> is export(:terms) { xdg-basedirectory.config-dirs }
+sub term:<cache-home>  is export(:terms) { xdg-basedirectory.cache-home  }
+sub term:<runtime-dir> is export(:terms) { xdg-basedirectory.runtime-dir }
 
 # vim: expandtab shiftwidth=4 ft=perl6
