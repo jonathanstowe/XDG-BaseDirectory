@@ -10,11 +10,16 @@ XDG::BaseDirectory - locate shared data and configuration
 
 =begin code
 
+    use XDG::BaseDirectory;
     my $bd = XDG::BaseDirectory.new
 
     for $bd.load-config-paths('mydomain.org', 'MyProg', 'Options') -> $d {
         say $d;
     }
+
+    # Directories can be made available as terms as well
+    use XDG::BaseDirectory :terms;
+    say config-home;
 
 =end code
 
@@ -273,4 +278,41 @@ take precedence over later ones.
         $resource;
     }
 }
+
+=begin pod
+
+=head2 Terms
+
+When XDG::BaseDirectory is C<use>d with the C<:terms> tag, the following
+properties of a generic XDG::BaseDirectory object are exported as eponymous
+terms:
+
+=item L<data-home>
+=item L<data-dirs>
+=item L<config-home>
+=item L<config-dirs>
+=item L<cache-home>
+=item L<runtime-dir>
+
+Example:
+
+=begin code
+
+    use XDG::BaseDirectory :terms;
+
+    say "Put config files into " ~ config-home ~ ", please.";
+
+=end code
+
+=end pod
+
+my constant $XDG = XDG::BaseDirectory.new;
+
+sub term:<data-home>   is export(:terms) { $XDG.data-home   }
+sub term:<data-dirs>   is export(:terms) { $XDG.data-dirs   }
+sub term:<config-home> is export(:terms) { $XDG.config-home }
+sub term:<config-dirs> is export(:terms) { $XDG.config-dirs }
+sub term:<cache-home>  is export(:terms) { $XDG.cache-home  }
+sub term:<runtime-dir> is export(:terms) { $XDG.runtime-dir }
+
 # vim: expandtab shiftwidth=4 ft=perl6
