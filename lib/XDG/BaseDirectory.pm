@@ -304,6 +304,21 @@ Example:
 
 =end code
 
+You can over-ride the default C<XDG::BaseDirectory> object used
+in these C<terms> by assigning to the dynanic variabled C<$*XDG>:
+
+=begin code
+
+   use XDG::BaseDirectory :terms;
+
+   my $*XDG = XDG::BaseDirectory.new( config-home => "foo".IO );
+
+   ....
+
+   say config-home; # -> "foo";
+
+=end code
+
 =end pod
 
 my  $XDG;
