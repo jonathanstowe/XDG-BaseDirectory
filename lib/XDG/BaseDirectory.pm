@@ -334,4 +334,4 @@ sub term:<config-dirs> is export(:terms) { xdg-basedirectory.config-dirs }
 sub term:<cache-home>  is export(:terms) { xdg-basedirectory.cache-home  }
 sub term:<runtime-dir> is export(:terms) { xdg-basedirectory.runtime-dir }
 
-# vim: expandtab shiftwidth=4 ft=perl6
+# vim: expandtab shiftwidth=4 ft=raku

@@ -19,4 +19,4 @@ is config-dirs, $*XDG.config-dirs, 'config-dirs is correct';
 is cache-home,  $*XDG.cache-home,  'cache-home is correct';
 is runtime-dir, $*XDG.runtime-dir, 'runtime-dir is correct';
 
-# vim: ft=perl6
+# vim: ft=raku

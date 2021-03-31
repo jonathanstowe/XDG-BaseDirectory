@@ -1,6 +1,6 @@
 {
   "name": "XDG::BaseDirectory",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "auth": "github:jonathanstowe",
   "api": "1.0",
   "description": "Implementation of the freedesktop.org XDG BaseDirectory specifications",
@@ -10,6 +10,7 @@
     "bugtracker": "https://github.com/jonathanstowe/XDG-BaseDirectory/issues"
   },
   "perl": "6.*",
+  "raku": "6.*",
   "resources": [
   ],
   "build-depends": [

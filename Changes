@@ -1,3 +1,6 @@
+v0.0.12 Wed 31 Mar 19:05:50 BST 2021
+	* Rename perl6 → Raku
+	* Switch to GH actions
 v0.0.11 Mon  4 Mar 09:30:33 GMT 2019
     * Had omitted the new tests from the distribution
 v0.0.10 Sun  3 Mar 19:34:38 GMT 2019
