@@ -1,3 +1,5 @@
+v0.0.13	Sun  7 Aug 09:42:50 BST 2022
+	* Upload to zef repository
 v0.0.12 Wed 31 Mar 19:05:50 BST 2021
 	* Rename perl6 → Raku
 	* Switch to GH actions
@@ -22,3 +24,4 @@ v0.0.3		Sat Mar 12 13:47:06 2016 +0000
 	* Remove version literal
 	* Post GLR changes
 	* Wrong name in META.info
+
