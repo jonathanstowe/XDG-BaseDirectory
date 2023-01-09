@@ -32,6 +32,7 @@ $base.mkdir;
 
 if !%*ENV<XDG_RUNTIME_DIR> {
     %*ENV<XDG_RUNTIME_DIR> = $base.child('.runtime').Str;
+    %*ENV<XDG_RUNTIME_DIR>.IO.mkdir;
 }
 %*ENV<XDG_CONFIG_HOME> = $base.child('.config').Str;
 %*ENV<XDG_DATA_HOME> = $base.child($*SPEC.catfile('.local', 'share')).Str;
