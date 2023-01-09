@@ -5,6 +5,7 @@ plan 6;
 
 my $*XDG = XDG::BaseDirectory.new(
     data-home => 'data-home'.IO,
+    state-home => 'state-home'.IO,
     data-dirs   => [ 'data-dirs'.IO ],
     config-home => 'cofig-home'.IO,
     config-dirs => [ 'config-dirs'.IO ],
@@ -13,6 +14,7 @@ my $*XDG = XDG::BaseDirectory.new(
 );
 
 is data-home,   $*XDG.data-home,   'data-home is correct';
+is state-home,  $*XDG.state-home,  'state-home is correct';
 is data-dirs,   $*XDG.data-dirs,   'data-dirs is correct';
 is config-home, $*XDG.config-home, 'config-home is correct';
 is config-dirs, $*XDG.config-dirs, 'config-dirs is correct';

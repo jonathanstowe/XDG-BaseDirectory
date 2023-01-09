@@ -59,6 +59,24 @@ over-ridden by the environment variable C<XDG_DATA_HOME>.
 
 =begin pod
 
+=head2 state-home
+
+This reflects the base path where the local state should be stored. Can be
+over-ridden by the environment variable C<XDG_DATA_STATE>.
+
+=end pod
+
+    has IO::Path $.state-home;
+
+    method state-home( --> IO::Path ) {
+        $!state-home //= %*ENV<XDG_STATE_HOME>.defined ?? %*ENV<XDG_STATE_HOME>.IO !! $*HOME.add($*SPEC.catfile('.local', 'state'));
+
+    }
+
+
+
+=begin pod
+
 =head2 data-dirs
 
 This returns a list of the locations where data can be read from, it can
@@ -328,6 +346,7 @@ my sub xdg-basedirectory( --> XDG::BaseDirectory ) {
 }
 
 sub term:<data-home>   is export(:terms) { xdg-basedirectory.data-home   }
+sub term:<state-home>  is export(:terms) { xdg-basedirectory.state-home   }
 sub term:<data-dirs>   is export(:terms) { xdg-basedirectory.data-dirs   }
 sub term:<config-home> is export(:terms) { xdg-basedirectory.config-home }
 sub term:<config-dirs> is export(:terms) { xdg-basedirectory.config-dirs }

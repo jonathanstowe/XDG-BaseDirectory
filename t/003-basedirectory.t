@@ -14,6 +14,7 @@ lives-ok { $obj = XDG::BaseDirectory.new }, " new XDG::BaseDirectory";
 isa-ok($obj, XDG::BaseDirectory, "right sort of thing");
 
 ok($obj.can(Q[data-home]), Q[can data-home]);
+ok($obj.can(Q[state-home]), Q[can state-home]);
 ok($obj.can(Q[data-dirs]), Q[can data-dirs]);
 ok($obj.can(Q[config-home]), Q[can config-home]);
 ok($obj.can(Q[config-dirs]), Q[can config-dirs]);
@@ -31,13 +32,16 @@ $base.mkdir;
 
 %*ENV<XDG_CONFIG_HOME> = $base.child('.config').Str;
 %*ENV<XDG_DATA_HOME> = $base.child($*SPEC.catfile('.local', 'share')).Str;
+%*ENV<XDG_STATE_HOME> = $base.child($*SPEC.catfile('.local', 'state')).Str;
 %*ENV<XDG_CACHE_HOME> = $base.child('.cache').Str;
 
 isa-ok $obj.cache-home, IO::Path, "cache-home";
 isa-ok($obj.config-home, IO::Path, 'config-home is an IO::Path');
 isa-ok($obj.data-home, IO::Path, 'data-home is an IO::Path');
+isa-ok($obj.state-home, IO::Path, 'state-home is an IO::Path');
 is($obj.config-home.Str, $base.child('.config').Str, 'config-home is the right path');
 is($obj.data-home.Str, $base.child($*SPEC.catfile('.local', 'share')).Str, 'data-home is the right path');
+is($obj.state-home.Str, $base.child($*SPEC.catfile('.local', 'state')).Str, 'state-home is the right path');
 isa-ok($obj.runtime-dir, IO::Path, "runtime-dir is an IO::Path");
 ok $obj.runtime-dir, "it's defined";
 ok $obj.runtime-dir.d, "and it's a directory";
