@@ -1,37 +1,34 @@
 {
+  "name": "XDG::BaseDirectory",
   "description": "Implementation of the freedesktop.org XDG BaseDirectory specifications",
   "version": "0.0.14",
   "meta-version": "1",
   "authors": [
     "Jonathan Stowe <jns+git@gellyfish.co.uk"
   ],
-  "resources": [
-  ],
-  "depends": [
-  ],
+  "auth": "zef:jonathanstowe",
+  "depends": [],
+  "build-depends": [],
   "test-depends": [
     "File::Find",
     "Shell::Command"
   ],
+  "provides": {
+    "XDG::BaseDirectory": "lib/XDG/BaseDirectory.rakumod"
+  },
+  "resources": [],
   "support": {
     "bugtracker": "https://github.com/jonathanstowe/XDG-BaseDirectory/issues",
     "source": "https://github.com/jonathanstowe/XDG-BaseDirectory.git"
   },
-  "provides": {
-    "XDG::BaseDirectory": "lib/XDG/BaseDirectory.pm"
-  },
-  "raku": "6.*",
   "license": "Artistic-2.0",
-  "auth": "zef:jonathanstowe",
-  "author": "Jonathan Stowe <jns+git@gellyfish.co.uk",
-  "name": "XDG::BaseDirectory",
   "tags": [
     "xdg",
     "desktop",
     "utils"
   ],
-  "build-depends": [
-  ],
   "api": "1.0",
-  "source-url": "https://github.com/jonathanstowe/XDG-BaseDirectory.git"
+  "source-url": "https://github.com/jonathanstowe/XDG-BaseDirectory.git",
+  "author": "Jonathan Stowe <jns+git@gellyfish.co.uk",
+  "raku": "6.*"
 }
