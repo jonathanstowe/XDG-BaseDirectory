@@ -1,7 +1,7 @@
 use Test;
 use XDG::BaseDirectory :terms;
 
-plan 6;
+plan 7;
 
 my $*XDG = XDG::BaseDirectory.new(
     data-home => 'data-home'.IO,

@@ -1,7 +1,7 @@
 use Test;
 use XDG::BaseDirectory :terms;
 
-plan 6;
+plan 7;
 
 is data-home,   XDG::BaseDirectory.new.data-home,   'data-home is correct';
 is state-home,   XDG::BaseDirectory.new.state-home, 'state-home is correct';
