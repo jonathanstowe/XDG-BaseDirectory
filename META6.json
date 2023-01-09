@@ -1,6 +1,6 @@
 {
   "description": "Implementation of the freedesktop.org XDG BaseDirectory specifications",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "meta-version": "1",
   "authors": [
     "Jonathan Stowe <jns+git@gellyfish.co.uk"
