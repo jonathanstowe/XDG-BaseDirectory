@@ -1,9 +1,15 @@
 use Test;
+use Shell::Command;
 use XDG::BaseDirectory :terms;
 
 plan 7;
 
 # Shut some noise in CI
+
+my $base = $*CWD.child('.test_' ~ $*PID);
+
+$base.mkdir;
+
 if !%*ENV<XDG_RUNTIME_DIR> {
     %*ENV<XDG_RUNTIME_DIR> = $base.child('.runtime').Str;
     %*ENV<XDG_RUNTIME_DIR>.IO.mkdir;
@@ -16,3 +22,10 @@ is config-home, XDG::BaseDirectory.new.config-home, 'config-home is correct';
 is config-dirs, XDG::BaseDirectory.new.config-dirs, 'config-dirs is correct';
 is cache-home,  XDG::BaseDirectory.new.cache-home,  'cache-home is correct';
 is runtime-dir, XDG::BaseDirectory.new.runtime-dir, 'runtime-dir is correct';
+
+END {
+   if $base.e {
+      rm_rf($base);
+   }
+}
+
