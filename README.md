@@ -57,4 +57,4 @@ I'm not able to test on a wide variety of platforms so any help there would be a
 
 This module is Free Software please see the [LICENCE](LICENCE) file in the distribution for the exact terms.
 
-© Jonathan Stowe 2015-2021
+© Jonathan Stowe 2015-2026

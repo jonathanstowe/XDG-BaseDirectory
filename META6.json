@@ -1,6 +1,6 @@
 {
   "description": "Implementation of the freedesktop.org XDG BaseDirectory specifications",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "meta-version": "1",
   "authors": [
     "Jonathan Stowe <jns+git@gellyfish.co.uk"
@@ -18,7 +18,7 @@
     "source": "https://github.com/jonathanstowe/XDG-BaseDirectory.git"
   },
   "provides": {
-    "XDG::BaseDirectory": "lib/XDG/BaseDirectory.pm"
+    "XDG::BaseDirectory": "lib/XDG/BaseDirectory.rakumod"
   },
   "raku": "6.*",
   "license": "Artistic-2.0",
